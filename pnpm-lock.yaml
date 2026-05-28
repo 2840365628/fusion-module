@@ -95,6 +95,21 @@ importers:
         specifier: ^3.4.0
         version: 3.5.35(typescript@6.0.3)
 
+  packages/vite-plugin-module-manifest:
+    dependencies:
+      '@fusion-module/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+      vite:
+        specifier: '>=5'
+        version: 8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)
+
+  packages/vite-plugin-module-shared:
+    dependencies:
+      vite:
+        specifier: '>=5'
+        version: 8.0.14(@types/node@25.9.1)(esbuild@0.27.7)(jiti@2.7.0)
+
 packages:
 
   '@babel/helper-string-parser@7.29.7':
