@@ -10,7 +10,10 @@ export interface ModuleState {
   set<T = unknown>(key: string, value: T): void
   delete(key: string): void
   clear(): void
-  subscribe<T = unknown>(key: string, handler: (value: T | undefined, oldValue: T | undefined) => void): () => void
+  subscribe<T = unknown>(
+    key: string,
+    handler: (value: T | undefined, oldValue: T | undefined) => void,
+  ): () => void
 }
 
 export interface ModuleRuntimeContext {
@@ -24,14 +27,14 @@ export interface RemoteModule {
   unmount(): void | Promise<void>
 }
 
-export interface ModuleManifestMeata {
+export interface ModuleManifestMeta {
   code: string
   name: string
   version: string
   runtime: string
 }
 
-export interface ModuleManifest extends ModuleManifestMeata {
+export interface ModuleManifest extends ModuleManifestMeta {
   entry: string
   style?: string
 }
