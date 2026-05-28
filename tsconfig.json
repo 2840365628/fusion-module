@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "include": [
+    "eslint.config.ts",
+    "*.config.ts",
+    "*.config.mts",
+    "packages/*/*.config.ts",
+    "packages/*/*.config.mts"
+  ],
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "noEmit": true
+  }
+}

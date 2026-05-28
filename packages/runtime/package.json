@@ -1,0 +1,30 @@
+{
+  "name": "@fusion-module/runtime",
+  "version": "0.0.0",
+  "description": "Framework-agnostic runtime for fusion-module.",
+  "type": "module",
+  "module": "./build/esm/index.js",
+  "types": "./build/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/esm/index.d.ts",
+      "import": "./build/esm/index.js"
+    }
+  },
+  "files": [
+    "build"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fusion-module/contracts": "workspace:*",
+    "zustand": "^5.0.13"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

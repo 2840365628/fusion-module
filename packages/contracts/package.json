@@ -1,0 +1,26 @@
+{
+  "name": "@fusion-module/contracts",
+  "version": "0.0.0",
+  "description": "Core protocol & type contracts for fusion-module.",
+  "type": "module",
+  "module": "./build/esm/index.js",
+  "types": "./build/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/esm/index.d.ts",
+      "import": "./build/esm/index.js"
+    }
+  },
+  "files": [
+    "build"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

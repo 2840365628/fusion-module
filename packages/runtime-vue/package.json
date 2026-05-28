@@ -1,0 +1,36 @@
+{
+  "name": "@fusion-module/runtime-vue",
+  "version": "0.0.0",
+  "description": "Vue bindings for fusion-module runtime.",
+  "type": "module",
+  "module": "./build/esm/index.js",
+  "types": "./build/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/esm/index.d.ts",
+      "import": "./build/esm/index.js"
+    },
+    "./style.css": "./build/esm/runtime-vue.css"
+  },
+  "files": [
+    "build"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "@fusion-module/contracts": "workspace:*",
+    "@fusion-module/runtime": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
