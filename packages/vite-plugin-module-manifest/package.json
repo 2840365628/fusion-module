@@ -1,6 +1,6 @@
 {
   "name": "@fusion-module/vite-plugin-module-manifest",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Vite plugin that emits a fusion-module manifest.json next to the build output.",
   "type": "module",
   "module": "./build/esm/index.js",
