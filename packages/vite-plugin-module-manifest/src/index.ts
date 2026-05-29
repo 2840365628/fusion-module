@@ -1,6 +1,6 @@
 import type { ModuleManifestMeta } from '@fusion-module/contracts'
 import type { Plugin, ResolvedConfig } from 'vite'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { access, mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
 export interface RegistryFile {
@@ -31,7 +31,6 @@ export const moduleManifestBuildPlugin = (options: ModuleManifestBuildPluginOpti
   } = options
 
   let resolveConfig: ResolvedConfig
-  let outputStyle: string | undefined
 
   return {
     name: 'module-manifest-build-plugin',
@@ -39,21 +38,18 @@ export const moduleManifestBuildPlugin = (options: ModuleManifestBuildPluginOpti
     configResolved(config) {
       resolveConfig = config
     },
-    generateBundle(_, bundle) {
-      const styleFileName = style.replace(/^\.\//, '')
-
-      const styleAsset = Object.values(bundle).find((item) => {
-        return item.type === 'asset' && item.fileName === styleFileName
-      })
-      outputStyle = styleAsset ? style : undefined
-    },
     async closeBundle() {
-      const manifestPath = resolve(resolveConfig.root, resolveConfig.build.outDir, manifestFileName)
+      const outDir = resolve(resolveConfig.root, resolveConfig.build.outDir)
+      const manifestPath = resolve(outDir, manifestFileName)
+
+      const styleFileName = style.replace(/^\.\//, '')
+      const stylePath = resolve(outDir, styleFileName)
+      const hasStyle = await access(stylePath).then(() => true, () => false)
 
       const buildManifest = {
         ...manifest,
         entry,
-        ...(outputStyle ? { style: outputStyle } : {}),
+        ...(hasStyle ? { style } : {}),
       }
 
       await mkdir(dirname(manifestPath), { recursive: true })
