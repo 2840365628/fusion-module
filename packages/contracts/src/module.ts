@@ -37,4 +37,5 @@ export interface ModuleManifestMeta {
 export interface ModuleManifest extends ModuleManifestMeta {
   entry: string
   style?: string
+  previewImage?: string
 }

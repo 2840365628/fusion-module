@@ -1,25 +1,14 @@
-import type { ModuleManifestMeta } from '@fusion-module/contracts'
+import type { ModuleManifest, ModuleManifestMeta } from '@fusion-module/contracts'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { access, mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
-
-export interface RegistryFile {
-  modules: Record<string, RegistryModuleRecord>
-}
-
-export interface RegistryModuleRecord {
-  code: string
-  name: string
-  manifestUrl: string
-  updatedAt: string
-  preview?: string
-}
 
 export interface ModuleManifestBuildPluginOptions {
   manifest: ModuleManifestMeta
   entry?: string
   style?: string
   manifestFileName?: string
+  previewImage?: string
 }
 
 export const moduleManifestBuildPlugin = (options: ModuleManifestBuildPluginOptions): Plugin => {
@@ -28,6 +17,7 @@ export const moduleManifestBuildPlugin = (options: ModuleManifestBuildPluginOpti
     entry = './index.es.js',
     manifestFileName = 'manifest.json',
     style = './style.css',
+    previewImage = './preview.png',
   } = options
 
   let resolveConfig: ResolvedConfig
@@ -44,12 +34,23 @@ export const moduleManifestBuildPlugin = (options: ModuleManifestBuildPluginOpti
 
       const styleFileName = style.replace(/^\.\//, '')
       const stylePath = resolve(outDir, styleFileName)
-      const hasStyle = await access(stylePath).then(() => true, () => false)
+      const hasStyle = await access(stylePath).then(
+        () => true,
+        () => false,
+      )
 
-      const buildManifest = {
+      const previewFileName = previewImage.replace(/^\.\//, '')
+      const previewPath = resolve(outDir, previewFileName)
+      const hasPreview = await access(previewPath).then(
+        () => true,
+        () => false,
+      )
+
+      const buildManifest: ModuleManifest = {
         ...manifest,
         entry,
         ...(hasStyle ? { style } : {}),
+        ...(hasPreview ? { previewImage } : {}),
       }
 
       await mkdir(dirname(manifestPath), { recursive: true })
