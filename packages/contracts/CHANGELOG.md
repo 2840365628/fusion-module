@@ -1,5 +1,11 @@
 # @fusion-module/contracts
 
+## 0.2.0
+
+### Minor Changes
+
+- e6dd1bb: preview
+
 ## 0.1.1
 
 ### Patch Changes
