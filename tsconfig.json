@@ -5,7 +5,9 @@
     "*.config.ts",
     "*.config.mts",
     "packages/*/*.config.ts",
-    "packages/*/*.config.mts"
+    "packages/*/*.config.mts",
+    "doc/.vitepress/**/*.ts",
+    "doc-usage/.vitepress/**/*.ts"
   ],
   "compilerOptions": {
     "module": "preserve",
