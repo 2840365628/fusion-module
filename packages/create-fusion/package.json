@@ -1,0 +1,43 @@
+{
+  "name": "@fusion-module/create-fusion",
+  "version": "0.1.0",
+  "description": "Scaffold fusion-module modules quickly. Run via `pnpm create @fusion-module/fusion module`.",
+  "type": "module",
+  "bin": {
+    "create-fusion": "./build/esm/index.js"
+  },
+  "files": [
+    "build",
+    "templates"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "fusion-module",
+    "cli",
+    "scaffold",
+    "create"
+  ],
+  "author": "刘晨宇",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.4.3",
+    "fs-extra": "^11.3.5",
+    "handlebars": "^4.7.9",
+    "kolorist": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "tsx": "^4.21.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

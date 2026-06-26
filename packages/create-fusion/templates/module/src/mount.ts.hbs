@@ -1,0 +1,57 @@
+import { VueQueryPlugin } from '@tanstack/vue-query'
+import { createApp, type App, h } from 'vue'
+{{#if useVxeTable}}
+import VxeUIBase from 'vxe-pc-ui'
+import VxeUITable from 'vxe-table'
+{{/if}}
+{{#if useElementPlus}}
+import ElementPlus, { ClickOutside } from 'element-plus'
+{{/if}}
+{{#if useEleAdminPlus}}
+import EleAdminPlus from 'ele-admin-plus'
+{{/if}}
+import AppComponent from './index.vue'
+import { setHttp } from './axios'
+import type { ModuleRuntimeContext } from '@fusion-module/contracts'
+import { AppProviders } from '@packages/ui'
+
+let app: App<Element> | null = null
+
+export const mount = (container: HTMLElement, context: ModuleRuntimeContext) => {
+  if (app) unmount()
+
+  if (context.axios) {
+    setHttp(context.axios)
+  }
+
+  app = createApp({
+    render() {
+      return h(AppProviders, { license: context.license }, { default: () => h(AppComponent, { context }) })
+    },
+  })
+
+{{#if useElementPlus}}
+  app.use(ElementPlus)
+{{/if}}
+{{#if useEleAdminPlus}}
+  app.use(EleAdminPlus)
+{{/if}}
+{{#if useVxeTable}}
+  app.use(VxeUIBase).use(VxeUITable)
+{{/if}}
+{{#if useElementPlus}}
+  app.directive('click-outside', ClickOutside)
+{{/if}}
+
+  app.use(VueQueryPlugin, {
+    queryClient: context.queryClient || undefined,
+  })
+
+  app.mount(container)
+}
+
+export const unmount = () => {
+  if (!app) return
+  app.unmount()
+  app = null
+}

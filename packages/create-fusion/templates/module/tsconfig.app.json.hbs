@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/*.vue",
+    "src/*.ts",
+    "src/**/*.ts",
+    "../../packages/types/src/index.ts",
+    "../../packages/ui/src/index.ts"
+  ],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "paths": {
+      "@packages/ui": ["../../packages/ui/src/index.ts"],
+      "@packages/types": ["../../packages/types/src/index.ts"]
+    },
+    "types": [
+{{#if useElementPlus}}
+      "element-plus/global"{{#if useEleAdminPlus}},{{/if}}
+{{/if}}
+{{#if useEleAdminPlus}}
+      "ele-admin-plus/typings/global"
+{{/if}}
+    ]
+  }
+}

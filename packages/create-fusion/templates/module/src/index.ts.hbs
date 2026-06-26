@@ -1,0 +1,12 @@
+import type { RemoteModule } from '@fusion-module/contracts'
+import { mount, unmount } from './mount'
+import { manifestMeta } from './manifest'
+import './style.css'
+
+const remoteModule: RemoteModule = {
+  mount,
+  unmount,
+}
+
+export default remoteModule
+export { manifestMeta }

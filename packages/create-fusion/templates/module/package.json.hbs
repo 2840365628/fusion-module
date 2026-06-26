@@ -1,0 +1,15 @@
+{
+  "name": "@modules/{{moduleCode}}",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.es.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  }
+}

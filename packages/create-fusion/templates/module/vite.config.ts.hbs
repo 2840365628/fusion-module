@@ -1,0 +1,49 @@
+import { resolve } from 'node:path'
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import { manifestMeta } from './src/manifest'
+import { moduleManifestBuildPlugin } from '@fusion-module/vite-plugin-module-manifest'
+import { fileURLToPath } from 'node:url'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    moduleManifestBuildPlugin({
+      manifest: manifestMeta,
+    }),
+  ],
+  resolve: {
+    alias: {
+      '@packages/ui': fileURLToPath(new URL('../../packages/ui/src/index.ts', import.meta.url)),
+      '@packages/types': fileURLToPath(new URL('../../packages/types/src/index.ts', import.meta.url)),
+    },
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    cssCodeSplit: false,
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      formats: ['es'],
+      fileName: () => 'index.es.js',
+      cssFileName: 'style',
+    },
+    rollupOptions: {
+      external: [
+        'vue',
+        '@tanstack/vue-query',
+        '@vueuse/core',
+{{#if useElementPlus}}
+        /^element-plus(\/.*)?$/,
+{{/if}}
+{{#if useEleAdminPlus}}
+        /^ele-admin-plus(\/.*)?$/,
+{{/if}}
+{{#if useVxeTable}}
+        'vxe-pc-ui',
+        'vxe-table',
+{{/if}}
+      ],
+    },
+  },
+})

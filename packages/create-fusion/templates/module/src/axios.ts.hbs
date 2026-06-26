@@ -1,0 +1,15 @@
+import type { AxiosInstance } from 'axios'
+
+let http: AxiosInstance | null = null
+
+export const setHttp = (value: AxiosInstance) => {
+  http = value
+}
+
+export const getHttp = () => {
+  if (!http) {
+    throw new Error('Module axios is not initialized')
+  }
+
+  return http
+}

@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 
 **/.vitepress/cache
+
+# create-fusion 本地测试产物(本仓库不发布业务模块)
+/modules/
