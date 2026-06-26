@@ -24,3 +24,6 @@ pnpm-debug.log*
 .env
 .env.local
 .env.*.local
+
+
+**/.vitepress/cache

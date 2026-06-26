@@ -20,7 +20,10 @@
     "release": "pnpm build && changeset publish",
     "docs:dev": "vitepress dev doc",
     "docs:build": "vitepress build doc",
-    "docs:preview": "vitepress preview doc"
+    "docs:preview": "vitepress preview doc",
+    "docs-usage:dev": "vitepress dev doc-usage",
+    "docs-usage:build": "vitepress build doc-usage",
+    "docs-usage:preview": "vitepress preview doc-usage"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

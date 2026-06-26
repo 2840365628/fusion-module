@@ -2,9 +2,10 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'fusion-module',
+  title: '/fusion-module/',
   description: 'fusion-module 核心包的技术实现文档：协议层、运行时内核、Vue 绑定与构建期 Vite 插件',
   lang: 'zh-CN',
+  base: '/fusion-modules-doc/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -24,15 +25,11 @@ export default defineConfig({
     sidebar: [
       {
         text: '总览',
-        items: [
-          { text: '总体架构与依赖关系', link: '/architecture' },
-        ],
+        items: [{ text: '总体架构与依赖关系', link: '/architecture' }],
       },
       {
         text: '@fusion-module/contracts',
-        items: [
-          { text: '协议类型实现说明', link: '/contracts' },
-        ],
+        items: [{ text: '协议类型实现说明', link: '/contracts' }],
       },
       {
         text: '@fusion-module/runtime',
