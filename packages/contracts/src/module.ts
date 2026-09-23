@@ -1,3 +1,5 @@
+import type { ModuleContract } from './contract'
+
 export type ModuleEventHandler<T = unknown> = (payload: T) => void
 
 export interface ModuleEventBus {
@@ -38,4 +40,6 @@ export interface ModuleManifest extends ModuleManifestMeta {
   entry: string
   style?: string
   previewImage?: string
+  /** 能力契约，0.3.0 新增；旧版本构建的模块没有该字段 */
+  contract?: ModuleContract
 }
